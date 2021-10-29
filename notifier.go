@@ -1,6 +1,7 @@
 package main
 
 import (
+	"strings"
 	"time"
 
 	"github.com/turnage/graw/reddit"
@@ -32,14 +33,14 @@ func (n *Notifier) Post(p *reddit.Post) error {
 }
 
 func (n *Notifier) UserPost(p *reddit.Post) error {
-	uctx, ok := n.Ctx.Users[p.Author]
+	uctx, ok := n.Ctx.Users[strings.ToLower(p.Author)]
 	if !ok {
 		//return errors.New("User comment received for unregistered user")
 		return nil
 	}
 
-	_, ok = uctx.Subreddits[p.Subreddit]
-	if (uctx.IsAllow && !ok) || (!uctx.IsAllow && ok) {
+	_, ok = uctx.Subreddits[strings.ToLower(p.Subreddit)]
+	if uctx.IsAllow != ok {
 		// Irrelevant subreddit, silently drop
 		return nil
 	}
@@ -61,14 +62,14 @@ func (n *Notifier) UserPost(p *reddit.Post) error {
 }
 
 func (n *Notifier) UserComment(c *reddit.Comment) error {
-	uctx, ok := n.Ctx.Users[c.Author]
+	uctx, ok := n.Ctx.Users[strings.ToLower(c.Author)]
 	if !ok {
 		//return errors.New("User comment received for unregistered user")
 		return nil
 	}
 
-	_, ok = uctx.Subreddits[c.Subreddit]
-	if (uctx.IsAllow && !ok) || (!uctx.IsAllow && ok) {
+	_, ok = uctx.Subreddits[strings.ToLower(c.Subreddit)]
+	if uctx.IsAllow != ok {
 		// Irrelevant subreddit, silently drop
 		return nil
 	}

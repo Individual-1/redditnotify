@@ -2,6 +2,7 @@ package main
 
 import (
 	"os"
+	"strings"
 
 	"github.com/turnage/graw"
 	"gopkg.in/yaml.v3"
@@ -36,16 +37,18 @@ func GenerateGrawConfig(config Config) *RedditContext {
 
 	for _, u := range config.Targets.Users {
 		user := User{}
-		user.Name = u.Name
+		uname := strings.ToLower(u.Name)
+
+		user.Name = uname
 		user.IsAllow = u.IsAllow
 
 		user.Subreddits = make(map[string]struct{})
 		for _, s := range u.Subreddits {
-			user.Subreddits[s] = struct{}{}
+			user.Subreddits[strings.ToLower(s)] = struct{}{}
 		}
 
-		rctx.Users[u.Name] = user
-		rctx.GrawCfg.Users = append(rctx.GrawCfg.Users, u.Name)
+		rctx.Users[uname] = user
+		rctx.GrawCfg.Users = append(rctx.GrawCfg.Users, uname)
 	}
 
 	return &rctx
