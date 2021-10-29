@@ -1,12 +1,16 @@
 package main
 
 import (
+	"time"
+
 	"github.com/turnage/graw"
+	"github.com/turnage/graw/reddit"
 )
 
 type Notifier struct {
 	Ctx        *RedditContext
 	NotifyFunc NotifyOutput
+	script     reddit.Script
 }
 
 type NotifyOutput func(RedditMessage)
@@ -24,8 +28,9 @@ type Config struct {
 }
 
 type RedditContext struct {
-	GrawCfg graw.Config     // Graw config
-	Users   map[string]User // User details for filtering
+	GrawCfg   graw.Config     // Graw config
+	Users     map[string]User // User details for filtering
+	UserAgent string          // User agent
 }
 
 type User struct {
@@ -35,8 +40,12 @@ type User struct {
 }
 
 type RedditMessage struct {
-	Title   string
-	Content string
-	URL     string
-	Tag     string
+	Title      string
+	Subreddit  string
+	Permalink  string
+	User       string
+	Content    string
+	ContentURL string
+	Tag        string
+	Created    time.Time
 }

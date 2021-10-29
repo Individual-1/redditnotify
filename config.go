@@ -29,6 +29,8 @@ func GenerateGrawConfig(config Config) *RedditContext {
 	rctx.GrawCfg = graw.Config{}
 	rctx.Users = make(map[string]User)
 
+	rctx.UserAgent = config.UserAgent
+
 	rctx.GrawCfg.Subreddits = config.Targets.Subreddits
 	rctx.GrawCfg.Users = make([]string, 0, 10)
 
