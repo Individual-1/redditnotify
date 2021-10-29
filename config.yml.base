@@ -1,0 +1,12 @@
+---
+targets:
+  subreddits: # List of subreddits to notify on new posts for
+    - iama
+    - movies
+  users:
+    - name: spez # Username to follow, no /u/
+      isAllow: true # true to use subreddits as allowlist, false for blocklist
+      subreddits: # List of subreddit to allow/block
+        - pics
+        - askreddit
+userAgent: Reddit notifier
