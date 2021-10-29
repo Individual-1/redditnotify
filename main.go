@@ -46,5 +46,5 @@ func main() {
 }
 
 func PrintTerm(msg RedditMessage) {
-	fmt.Printf("(%s) [%s] %s in %s\n/u/%s\nPermalink: https://reddit.com%s\nContent URL: %s\n%s\n---", msg.Created.Format("01-02-2006 15:04:05"), msg.Tag, msg.Title, msg.Subreddit, msg.User, msg.Permalink, msg.ContentURL, msg.Content)
+	fmt.Printf("(%s) [%s] %s in %s\n/u/%s\nPermalink: https://reddit.com%s\nContent URL: %s\n%s\n---\n", msg.Created.Format("01-02-2006 15:04:05"), msg.Tag, msg.Title, msg.Subreddit, msg.User, msg.Permalink, msg.ContentURL, msg.Content)
 }
