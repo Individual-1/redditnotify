@@ -1,0 +1,10 @@
+---
+targets:
+  subreddits:
+    - askreddit
+  users:
+    - name: username
+      isAllow: false
+      subreddits:
+        - popular
+userAgent: asdf
